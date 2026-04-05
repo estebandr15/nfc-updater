@@ -34,7 +34,7 @@ static void ProcessBlock(ST25_CRC_Ctx *ctx, const uint8_t *block) {
 }
 
 // ==========================================
-//    NUEVAS FUNCIONES DE ACUMULACIÓN
+//        FUNCIONES DE ACUMULACIÓN
 // ==========================================
 
 // 1. INICIALIZAR
