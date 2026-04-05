@@ -5,7 +5,7 @@
 #define CRC_INIT  0xFFFFFFFF
 #define CRC_XOROT 0x00000000
 
-// --- Estructura de Contexto (Necesaria para acumular) ---
+// Estructura de Contexto (Necesaria para acumular)
 typedef struct {
     uint32_t current_crc;
     uint8_t  buffer[4];     // Guarda bytes "sobrantes" hasta juntar 4
