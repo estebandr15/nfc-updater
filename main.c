@@ -65,7 +65,7 @@ void pause_ms(int ms)
     Sleep(ms);
 }
 
-// --- Función manejadora para Ctrl+C ---
+// Función manejadora para Ctrl+C
 BOOL WINAPI CtrlCHandler(DWORD fdwCtrlType)
 {
     switch (fdwCtrlType)
@@ -91,7 +91,7 @@ int main()
     FILE *f;                             // Puntero al fichero
     unsigned char *firmware_buffer;      // Puntero para el buffer
     long f_size;                         // Tamaño del fichero
-    char *bin_file = find_bin_file("."); // Buscar en el directorio actual
+    char *bin_file = find_bin_file();    // Buscar en el directorio actual
     unsigned char bytes_leidos = 0;
     long total_bytes = 0;
     int contador_bloques = 0;
@@ -347,7 +347,7 @@ int main()
             apdu[idx++] = 0x02;
             int pos_ldata = idx++;
 
-            // --- LÓGICA FTM (0x04) ---
+            // --- LÓGICA FTM  ---
             if (primera_vez)
             {
 
@@ -460,7 +460,7 @@ int main()
                         }
                     }
                 }
-                else // Si se han leído menos de 227 bytes y es último paquete, añadimos el CRC
+                else // Si se han leído menos de 227 bytes y es el último paquete, añadimos el CRC
                 {
                     apdu[idx++] = bytes_leidos + 4;
 
@@ -565,7 +565,7 @@ int main()
         lResult = SCardDisconnect(hCard, SCARD_LEAVE_CARD);
         check_error(lResult, "SCardDisconnect");
 
-        // --- 8. Esperar a que el tag sea retirado ---
+        // Esperar a que el tag sea retirado
         printf("Por favor, retira el tag del lector...\n");
 
         lResult = SCARD_S_SUCCESS; // Asumimos que el tag sigue ahí
@@ -598,7 +598,6 @@ int main()
         printf("Tag retirado. Esperando el proximo tag...\n\n");
     }
 
-    // Limpieza (solo se llega si se rompe el bucle) ---
     DisconnectReader(hContext, mszReaders); // Liberar memoria y contexto PC/SC
 
     return 0;
